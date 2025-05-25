@@ -1,0 +1,119 @@
+---
+title: "Análisis del Rendimiento Escolar"
+author: "América Itzel Reyes Alatorre"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+Introducción:
+Este análisis explora cómo diversos factores socioeducativos influyen en el rendimiento académico de estudiantes en las áreas de matemáticas, lectura y escritura. El estudio se basa en el dataset "Students Performance in Exams" disponible en Kaggle, que contiene información de 1,000 estudiantes.
+
+Objetivos principales:
+-Analizar el impacto del género, nivel educativo de los padres y tipo de almuerzo en los  puntajes académicos
+
+-Identificar diferencias significativas entre grupos
+
+-Visualizar patrones y relaciones clave en los datos
+
+```{r}
+# Cargar librerías
+library(dplyr)
+library(ggplot2)
+
+# 1. Cargar datos
+data <- read.csv("StudentsPerformance.csv")
+
+# 2. Exploración inicial
+summary(data) 
+str(data)      
+
+# 3. Manejo de valores faltantes 
+sum(is.na(data))  
+# Opcional: Eliminar filas con NAs 
+data_clean <- na.omit(data)
+
+```
+
+A continuación se realizan las transformaciones con dplyr, convirtiendo variables categóricas a factores, creando igual nuevas variables para su posterior manipulación.
+
+```{r}
+# 4. Transformaciones con dplyr
+data_clean <- data %>%
+  rename(
+    parental_education = `parental.level.of.education`, 
+    lunch_type = lunch                                  
+  ) %>%
+  mutate(
+    gender = as.factor(gender),
+    parental_education = factor(parental_education,
+                                levels = c("some high school", "high school", "some college",
+                                           "associate's degree", "bachelor's degree", "master's degree")),
+    lunch_type = as.factor(lunch_type), 
+    avg_score = (math.score + reading.score + writing.score) / 3
+  )
+
+# 5. Estadísticos por grupo 
+data_clean %>%
+  group_by(gender) %>%
+  summarise(
+    mean_math = mean(math.score),
+    median_math = median(math.score)
+  )
+
+data_clean %>%
+  group_by(lunch_type) %>%
+  summarise(
+    mean_math = mean(math.score),
+    mean_reading = mean(reading.score),
+    mean_writing = mean(writing.score),
+    count = n()
+  )
+```
+
+Ahora creamos visualizaciones que exploren relaciones entre variables clave tomando como referencia el cuestionamiento inicial
+
+```{r}
+# 6. Visualizaciones
+
+ggplot(data_clean, aes(x = parental_education, y = math.score, fill = gender)) +
+  geom_boxplot() +
+  labs(
+    title = "Rendimiento en matemáticas por género y educación de los padres",
+    x = "Nivel educativo de los padres",
+    y = "Puntaje de matemáticas",
+    fill = "Género"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(data_clean, aes(x = math.score, y = reading.score, color = lunch_type)) +
+  geom_point(alpha = 0.6) +
+  labs(
+    title = "Relación entre puntajes de matemáticas y lectura",
+    x = "Matemáticas",
+    y = "Lectura",
+    color = "Tipo de almuerzo"
+  ) +
+  scale_color_manual(values = c("red", "blue"))  
+
+ggplot(data_clean, aes(x = lunch_type, y = math.score, fill = gender)) +
+  geom_boxplot() +
+  labs(
+    title = "Rendimiento en matemáticas por tipo de almuerzo y género",
+    x = "Tipo de almuerzo",
+    y = "Puntaje de matemáticas",
+    fill = "Género"
+  ) +
+  theme_minimal()
+```
+
+Conclusiones:
+De acuerdo con los hallazgos del análisis, se identificaron tres factores clave que influyen en el desempeño estudiantil: el tipo de almuerzo, el nivel educativo de los padres y las diferencias por género en áreas específicas. Para optimizar el rendimiento académico en la institución, se recomienda implementar las siguientes estrategias:
+
+En primer lugar, dado que los estudiantes con almuerzo "standard" obtienen mejores resultados, se sugiere evaluar y fortalecer los programas de alimentación escolar, especialmente para aquellos en situación vulnerable. Esto podría incluir la ampliación de becas de comedor, la mejora nutricional de los menús o la implementación de desayunos escolares, asegurando que todos los alumnos tengan acceso a una alimentación equilibrada. Estudios respaldan que una nutrición adecuada está directamente vinculada a la concentración y el rendimiento cognitivo.
+
+En segundo lugar, la correlación entre el nivel educativo de los padres y el éxito académico de los estudiantes indica la necesidad de programas que involucren a las familias en el proceso educativo. Se podrían organizar talleres para padres sobre técnicas de apoyo en el hogar, tutorías conjuntas o acceso a recursos educativos digitales. Además, para abordar las diferencias por género —como el menor desempeño de las mujeres en matemáticas—, se recomienda fomentar mentorías con enfoque de género, clubes de ciencias dirigidos a mujeres y capacitación docente en metodologías inclusivas que reduzcan estereotipos.
+
+Finalmente, un enfoque integral que combine políticas nutricionales, participación familiar y equidad de género permitirá no solo mejorar los resultados académicos, sino también reducir brechas socioeconómicas y promover un ambiente educativo más inclusivo y equitativo. La institución podría medir el impacto de estas intervenciones mediante evaluaciones periódicas, ajustando las estrategias según los resultados obtenidos.
+

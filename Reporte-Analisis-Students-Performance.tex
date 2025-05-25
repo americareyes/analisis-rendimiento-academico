@@ -1,0 +1,373 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Análisis del Rendimiento Escolar},
+  pdfauthor={América Itzel Reyes Alatorre},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Análisis del Rendimiento Escolar}
+\author{América Itzel Reyes Alatorre}
+\date{}
+
+\begin{document}
+\maketitle
+
+Introducción: Este análisis explora cómo diversos factores
+socioeducativos influyen en el rendimiento académico de estudiantes en
+las áreas de matemáticas, lectura y escritura. El estudio se basa en el
+dataset ``Students Performance in Exams'' disponible en Kaggle, que
+contiene información de 1,000 estudiantes.
+
+Objetivos principales: -Analizar el impacto del género, nivel educativo
+de los padres y tipo de almuerzo en los puntajes académicos
+
+-Identificar diferencias significativas entre grupos
+
+-Visualizar patrones y relaciones clave en los datos
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Cargar librerías}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Adjuntando el paquete: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# 1. Cargar datos}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"StudentsPerformance.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. Exploración inicial}
+\FunctionTok{summary}\NormalTok{(data) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     gender          race.ethnicity     parental.level.of.education
+##  Length:1000        Length:1000        Length:1000                
+##  Class :character   Class :character   Class :character           
+##  Mode  :character   Mode  :character   Mode  :character           
+##                                                                   
+##                                                                   
+##                                                                   
+##     lunch           test.preparation.course   math.score     reading.score   
+##  Length:1000        Length:1000             Min.   :  0.00   Min.   : 17.00  
+##  Class :character   Class :character        1st Qu.: 57.00   1st Qu.: 59.00  
+##  Mode  :character   Mode  :character        Median : 66.00   Median : 70.00  
+##                                             Mean   : 66.09   Mean   : 69.17  
+##                                             3rd Qu.: 77.00   3rd Qu.: 79.00  
+##                                             Max.   :100.00   Max.   :100.00  
+##  writing.score   
+##  Min.   : 10.00  
+##  1st Qu.: 57.75  
+##  Median : 69.00  
+##  Mean   : 68.05  
+##  3rd Qu.: 79.00  
+##  Max.   :100.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(data)      }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    1000 obs. of  8 variables:
+##  $ gender                     : chr  "female" "female" "female" "male" ...
+##  $ race.ethnicity             : chr  "group B" "group C" "group B" "group A" ...
+##  $ parental.level.of.education: chr  "bachelor's degree" "some college" "master's degree" "associate's degree" ...
+##  $ lunch                      : chr  "standard" "standard" "standard" "free/reduced" ...
+##  $ test.preparation.course    : chr  "none" "completed" "none" "none" ...
+##  $ math.score                 : int  72 69 90 47 76 71 88 40 64 38 ...
+##  $ reading.score              : int  72 90 95 57 78 83 95 43 64 60 ...
+##  $ writing.score              : int  74 88 93 44 75 78 92 39 67 50 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3. Manejo de valores faltantes }
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(data))  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Opcional: Eliminar filas con NAs }
+\NormalTok{data\_clean }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+A continuación se realizan las transformaciones con dplyr, convirtiendo
+variables categóricas a factores, creando igual nuevas variables para su
+posterior manipulación.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 4. Transformaciones con dplyr}
+\NormalTok{data\_clean }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename}\NormalTok{(}
+    \AttributeTok{parental\_education =} \StringTok{\textasciigrave{}}\AttributeTok{parental.level.of.education}\StringTok{\textasciigrave{}}\NormalTok{, }
+    \AttributeTok{lunch\_type =}\NormalTok{ lunch                                  }
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{gender =} \FunctionTok{as.factor}\NormalTok{(gender),}
+    \AttributeTok{parental\_education =} \FunctionTok{factor}\NormalTok{(parental\_education,}
+                                \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"some high school"}\NormalTok{, }\StringTok{"high school"}\NormalTok{, }\StringTok{"some college"}\NormalTok{,}
+                                           \StringTok{"associate\textquotesingle{}s degree"}\NormalTok{, }\StringTok{"bachelor\textquotesingle{}s degree"}\NormalTok{, }\StringTok{"master\textquotesingle{}s degree"}\NormalTok{)),}
+    \AttributeTok{lunch\_type =} \FunctionTok{as.factor}\NormalTok{(lunch\_type), }
+    \AttributeTok{avg\_score =}\NormalTok{ (math.score }\SpecialCharTok{+}\NormalTok{ reading.score }\SpecialCharTok{+}\NormalTok{ writing.score) }\SpecialCharTok{/} \DecValTok{3}
+\NormalTok{  )}
+
+\CommentTok{\# 5. Estadísticos por grupo }
+\NormalTok{data\_clean }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(gender) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{mean\_math =} \FunctionTok{mean}\NormalTok{(math.score),}
+    \AttributeTok{median\_math =} \FunctionTok{median}\NormalTok{(math.score)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   gender mean_math median_math
+##   <fct>      <dbl>       <dbl>
+## 1 female      63.6          65
+## 2 male        68.7          69
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_clean }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(lunch\_type) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{mean\_math =} \FunctionTok{mean}\NormalTok{(math.score),}
+    \AttributeTok{mean\_reading =} \FunctionTok{mean}\NormalTok{(reading.score),}
+    \AttributeTok{mean\_writing =} \FunctionTok{mean}\NormalTok{(writing.score),}
+    \AttributeTok{count =} \FunctionTok{n}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 5
+##   lunch_type   mean_math mean_reading mean_writing count
+##   <fct>            <dbl>        <dbl>        <dbl> <int>
+## 1 free/reduced      58.9         64.7         63.0   355
+## 2 standard          70.0         71.7         70.8   645
+\end{verbatim}
+
+Ahora creamos visualizaciones que exploren relaciones entre variables
+clave tomando como referencia el cuestionamiento inicial
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 6. Visualizaciones}
+
+\FunctionTok{ggplot}\NormalTok{(data\_clean, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ parental\_education, }\AttributeTok{y =}\NormalTok{ math.score, }\AttributeTok{fill =}\NormalTok{ gender)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Rendimiento en matemáticas por género y educación de los padres"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Nivel educativo de los padres"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Puntaje de matemáticas"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Género"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Reporte-Analisis-Students-Performance_files/figure-latex/unnamed-chunk-3-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(data\_clean, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ math.score, }\AttributeTok{y =}\NormalTok{ reading.score, }\AttributeTok{color =}\NormalTok{ lunch\_type)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Relación entre puntajes de matemáticas y lectura"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Matemáticas"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Lectura"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Tipo de almuerzo"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))  }
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Reporte-Analisis-Students-Performance_files/figure-latex/unnamed-chunk-3-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(data\_clean, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ lunch\_type, }\AttributeTok{y =}\NormalTok{ math.score, }\AttributeTok{fill =}\NormalTok{ gender)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Rendimiento en matemáticas por tipo de almuerzo y género"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Tipo de almuerzo"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Puntaje de matemáticas"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Género"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Reporte-Analisis-Students-Performance_files/figure-latex/unnamed-chunk-3-3.pdf}}
+
+Conclusiones: De acuerdo con los hallazgos del análisis, se
+identificaron tres factores clave que influyen en el desempeño
+estudiantil: el tipo de almuerzo, el nivel educativo de los padres y las
+diferencias por género en áreas específicas. Para optimizar el
+rendimiento académico en la institución, se recomienda implementar las
+siguientes estrategias:
+
+En primer lugar, dado que los estudiantes con almuerzo ``standard''
+obtienen mejores resultados, se sugiere evaluar y fortalecer los
+programas de alimentación escolar, especialmente para aquellos en
+situación vulnerable. Esto podría incluir la ampliación de becas de
+comedor, la mejora nutricional de los menús o la implementación de
+desayunos escolares, asegurando que todos los alumnos tengan acceso a
+una alimentación equilibrada. Estudios respaldan que una nutrición
+adecuada está directamente vinculada a la concentración y el rendimiento
+cognitivo.
+
+En segundo lugar, la correlación entre el nivel educativo de los padres
+y el éxito académico de los estudiantes indica la necesidad de programas
+que involucren a las familias en el proceso educativo. Se podrían
+organizar talleres para padres sobre técnicas de apoyo en el hogar,
+tutorías conjuntas o acceso a recursos educativos digitales. Además,
+para abordar las diferencias por género ---como el menor desempeño de
+las mujeres en matemáticas---, se recomienda fomentar mentorías con
+enfoque de género, clubes de ciencias dirigidos a mujeres y capacitación
+docente en metodologías inclusivas que reduzcan estereotipos.
+
+Finalmente, un enfoque integral que combine políticas nutricionales,
+participación familiar y equidad de género permitirá no solo mejorar los
+resultados académicos, sino también reducir brechas socioeconómicas y
+promover un ambiente educativo más inclusivo y equitativo. La
+institución podría medir el impacto de estas intervenciones mediante
+evaluaciones periódicas, ajustando las estrategias según los resultados
+obtenidos.
+
+\end{document}
